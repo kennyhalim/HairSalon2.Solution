@@ -3,10 +3,14 @@
 <ol>
 @foreach (var item in @Model["cuisines"])
 {
-  <li><a href='/restaurants/@Model["restaurants"].GetId()/cuisines/@item.GetId()'>@item.GetTypeOfFood()</a></li>
+  <li><a href='/restaurants/@Model["restaurant"].GetId()/cuisines/@item.GetId()'>@item.GetTypeOfFood()</a></li>
 }
 </ol>
 
-<p><a href='/restaurants/@Model["restaurants"].GetId()/cuisines/new'>Add a new item</a></p>
+
+<p><a href='/restaurants/@Model["restaurant"].GetId()/cuisines/new'>Add a new item</a></p>
 <p><a href='/restaurants'>Return to restaurant list</a></p>
+<form action="/restaurants/@Model["restaurant"].GetId()/delete" method="post">
+  <button type="submit">Delete this </button>
+</form>
 <p><a href='/'>Return to Main Page</a></p>

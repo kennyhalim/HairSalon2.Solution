@@ -7,53 +7,64 @@ namespace BestRestaurants.Controllers
   public class CuisinesController : Controller
   {
 
-    // [HttpGet("/categories/{categoryId}/items/new")]
-    // public ActionResult New(int categoryId)
-    // {
-    //  Category category = Category.Find(categoryId);
-    //  return View(category);
-    // }
-    //
-    // [HttpGet("/categories/{categoryId}/items/{itemId}")]
-    // public ActionResult Show(int categoryId, int itemId)
-    // {
-    //   Item item = Item.Find(itemId);
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category category = Category.Find(categoryId);
-    //   model.Add("item", item);
-    //   model.Add("category", category);
-    //   return View(model);
-    // }
-    //
-    // [HttpPost("/items/delete")]
-    // public ActionResult DeleteAll()
-    // {
-    //   Item.ClearAll();
-    //   return View();
-    // }
-    //
-    // [HttpGet("/categories/{categoryId}/items/{itemId}/edit")]
-    // public ActionResult Edit(int categoryId, int itemId)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category category = Category.Find(categoryId);
-    //   model.Add("category", category);
-    //   Item item = Item.Find(itemId);
-    //   model.Add("item", item);
-    //   return View(model);
-    // }
-    //
-    // [HttpPost("/categories/{categoryId}/items/{itemId}")]
-    // public ActionResult Update(int categoryId, int itemId, string newDescription)
-    // {
-    //   Item item = Item.Find(itemId);
-    //   item.Edit(newDescription);
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category category = Category.Find(categoryId);
-    //   model.Add("category", category);
-    //   model.Add("item", item);
-    //   return View("Show", model);
-    // }
+    [HttpGet("/restaurants/{restaurantId}/cuisines/new")]
+    public ActionResult New(int restaurantId)
+    {
+     Restaurant restaurant = Restaurant.Find(restaurantId);
+     return View(restaurant);
+    }
+
+    [HttpGet("/restaurants/{restaurantId}/cuisines/{cuisineId}")]
+    public ActionResult Show(int restaurantId, int cuisineId)
+    {
+      Cuisine item = Cuisine.Find(cuisineId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Restaurant restaurant = Restaurant.Find(restaurantId);
+      model.Add("cuisine", item);
+      model.Add("restaurant", restaurant);
+      return View(model);
+    }
+
+    [HttpPost("/restaurants/{restaurantId}/cuisines/{cuisineId}/delete")]
+    public ActionResult Delete(int restaurantId, int cuisineId)
+    {
+      Restaurant foundRestaurant = Restaurant.Find(restaurantId);
+      Cuisine item = Cuisine.Find(cuisineId);
+      item.Delete(cuisineId);
+      return View(foundRestaurant);
+    }
+
+
+    [HttpPost("/cuisines/delete")]
+    public ActionResult DeleteAll()
+    {
+      Cuisine.ClearAll();
+      return View();
+    }
+
+    [HttpGet("/restaurants/{restaurantId}/cuisines/{cuisineId}/edit")]
+    public ActionResult Edit(int restaurantId, int cuisineId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Restaurant restaurant = Restaurant.Find(restaurantId);
+      model.Add("restaurant", restaurant);
+      Cuisine item = Cuisine.Find(cuisineId);
+      model.Add("cuisine", item);
+      return View(model);
+    }
+
+    [HttpPost("/restaurants/{restaurantId}/cuisines/{cuisineId}")]
+    public ActionResult Update(int restaurantId, int cuisineId, string newType)
+    {
+      Cuisine item = Cuisine.Find(cuisineId);
+      item.Edit(newType);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Restaurant restaurant = Restaurant.Find(restaurantId);
+      model.Add("restaurant", restaurant);
+      model.Add("cuisine", item);
+      return View("Show", model);
+    }
+
 
   }
 }

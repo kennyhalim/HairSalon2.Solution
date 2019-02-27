@@ -35,9 +35,17 @@ namespace BestRestaurants.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       Restaurant selectedRestaurant = Restaurant.Find(id);
       List<Cuisine> restaurantCuisines = selectedRestaurant.GetCuisines();
-      model.Add("restaurants", selectedRestaurant);
+      model.Add("restaurant", selectedRestaurant);
       model.Add("cuisines", restaurantCuisines);
       return View(model);
+    }
+
+    [HttpPost("/restaurants/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+      Restaurant selectedRestaurant = Restaurant.Find(id);
+      selectedRestaurant.Delete(id);
+      return RedirectToAction("Index");
     }
 
     //This one creates new Items within a given Category, not new Categories:
