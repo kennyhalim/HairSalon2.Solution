@@ -5,55 +5,54 @@ using BestRestaurants.Models;
 
 namespace BestRestaurants.Controllers
 {
-  // public class RestaurantsController : Controller
-  // {
-  //
-  //   [HttpGet("/categories")]
-  //   public ActionResult Index()
-  //   {
-  //     List<Category> allCategories = Category.GetAll();
-  //     return View(allCategories);
-  //   }
-  //
-  //   [HttpGet("/categories/new")]
-  //   public ActionResult New()
-  //   {
-  //     return View();
-  //   }
-  //
-  //   [HttpPost("/categories")]
-  //   public ActionResult Create(string categoryName)
-  //   {
-  //     Category newCategory = new Category(categoryName);
-  //     List<Category> allCategories = Category.GetAll();
-  //     return View("Index", allCategories);
-  //   }
-  //
-  //   [HttpGet("/categories/{id}")]
-  //   public ActionResult Show(int id)
-  //   {
-  //     Dictionary<string, object> model = new Dictionary<string, object>();
-  //     Category selectedCategory = Category.Find(id);
-  //     List<Item> categoryItems = selectedCategory.GetItems();
-  //     model.Add("category", selectedCategory);
-  //     model.Add("items", categoryItems);
-  //     return View(model);
-  //   }
-  //
-  //   // This one creates new Items within a given Category, not new Categories:
-  //   [HttpPost("/categories/{categoryId}/items")]
-  //   public ActionResult Create(int categoryId, string itemDescription)
-  //   {
-  //     Dictionary<string, object> model = new Dictionary<string, object>();
-  //     Category foundCategory = Category.Find(categoryId);
-  //     Item newItem = new Item(itemDescription);
-  //     newItem.Save();
-  //     foundCategory.AddItem(newItem);
-  //     List<Item> categoryItems = foundCategory.GetItems();
-  //     model.Add("items", categoryItems);
-  //     model.Add("category", foundCategory);
-  //     return View("Show", model);
-  //   }
-  //
-  // }
+  public class RestaurantsController : Controller
+  {
+
+    [HttpGet("/restaurants")]
+    public ActionResult Index()
+    {
+      List<Restaurant> allRestaurants = Restaurant.GetAll();
+      return View(allRestaurants);
+    }
+
+    [HttpGet("/restaurants/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
+
+    [HttpPost("/restaurants")]
+    public ActionResult Create(string restaurantName)
+    {
+      Restaurant newRestaurant = new Restaurant(restaurantName);
+      newRestaurant.Save();
+      return RedirectToAction("Index");
+    }
+
+    [HttpGet("/restaurants/{id}")]
+    public ActionResult Show(int id)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Restaurant selectedRestaurant = Restaurant.Find(id);
+      List<Cuisine> restaurantCuisines = selectedRestaurant.GetCuisines();
+      model.Add("restaurants", selectedRestaurant);
+      model.Add("cuisines", restaurantCuisines);
+      return View(model);
+    }
+
+    //This one creates new Items within a given Category, not new Categories:
+    [HttpPost("/restaurants/{restaurantId}/cuisines")]
+    public ActionResult Create(int restaurantId, string cuisineFood)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Restaurant foundRestaurant = Restaurant.Find(restaurantId);
+      Cuisine newCuisine = new Cuisine(cuisineFood, restaurantId);
+      newCuisine.Save();
+      List<Cuisine> restaurantCuisines = foundRestaurant.GetCuisines();
+      model.Add("cuisines", restaurantCuisines);
+      model.Add("restaurant", foundRestaurant);
+      return View("Show", model);
+    }
+
+  }
 }
