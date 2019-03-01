@@ -1,0 +1,12 @@
+<h1>Hair Salon</h1>
+<hr>
+
+<h2>Edit Client: @Model["clients"].GetName()</h2>
+
+<form action="/stylists/@Model["stylists"].GetId()/clients/@Model["clients"].GetId()" method="post">
+  <label for="newName">Name:</label>
+  <input type="text" name="newName" value="@Model["clients"].GetName()" required>
+  <button type="submit">Edit</button>
+</form>
+
+<h4><a href="/stylists/@Model["stylists"].GetId()/clients/@Model["clients"].GetId()">Return to previous page</a></h4>

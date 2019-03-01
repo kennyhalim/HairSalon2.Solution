@@ -1,0 +1,17 @@
+<h3>All Clients in @Model["stylists"].GetName()</h3>
+
+<ol>
+@foreach (var client in @Model["clients"])
+{
+  <li><a href='/stylists/@Model["stylists"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+}
+</ol>
+
+
+<p><a href='/stylists/@Model["stylists"].GetId()/clients/new'>Add a new client</a></p>
+<form action="/stylists/@Model["stylists"].GetId()/delete" method="post">
+  <button type="submit">Delete this stylist</button>
+</form>
+<p><a href='/stylists'>Return to stylist list</a></p>
+
+<p><a href='/'>Return to Main Page</a></p>
