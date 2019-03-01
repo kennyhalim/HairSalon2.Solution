@@ -74,11 +74,11 @@ namespace HairSalon.Tests
     public void GetAll_ReturnsClients_ClientList()
     {
       //Arrange
-      string description01 = "American";
-      string description02 = "English";
-      Client newClient1 = new Client(description01, 1);
+      string name01 = "test";
+      string name02 = "test";
+      Client newClient1 = new Client(name01, "test", 1);
       newClient1.Save();
-      Client newClient2 = new Client(description02, 1);
+      Client newClient2 = new Client(name02, "test", 1);
       newClient2.Save();
       List<Client> newList = new List<Client> { newClient1, newClient2 };
 
@@ -88,7 +88,7 @@ namespace HairSalon.Tests
       //Assert
       CollectionAssert.AreEqual(newList, result);
     }
-    
+
     // [TestMethod]
     // public void Find_ReturnsCorrectClientFromDatabase_Client()
     // {
