@@ -82,35 +82,37 @@ namespace HairSalon.Models
       }
     }
 
-    // public static Client Find(int id)
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM Client WHERE id = (@searchId);";
-    //   MySqlParameter searchId = new MySqlParameter();
-    //   searchId.ParameterName = "@searchId";
-    //   searchId.Value = id;
-    //   cmd.Parameters.Add(searchId);
-    //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   int ClientId = 0;
-    //   string ClientName = "";
-    //   int Clientstylistid = 0;
-    //   while(rdr.Read())
-    //   {
-    //     ClientId = rdr.GetInt32(0);
-    //     ClientName = rdr.GetString(1);
-    //     Clientstylistid = rdr.GetInt32(2);
-    //   }
-    //   Client newClient = new Client(ClientName, Clientstylistid, ClientId);
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return newClient;
-    // }
-    //
+    public static Client Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM client WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int ClientId = 0;
+      string ClientName = "";
+      string ClientPhone = "";
+      int ClientStylistId = 0;
+      while(rdr.Read())
+      {
+        ClientId = rdr.GetInt32(0);
+        ClientName = rdr.GetString(1);
+        ClientPhone = rdr.GetString(2);
+        ClientStylistId = rdr.GetInt32(3);
+      }
+      Client newClient = new Client(ClientName, ClientPhone, ClientStylistId, ClientId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newClient;
+    }
+
     public override bool Equals(System.Object otherClient)
     {
       if (!(otherClient is Client))

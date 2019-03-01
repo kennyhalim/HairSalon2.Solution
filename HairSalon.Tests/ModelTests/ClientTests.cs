@@ -89,93 +89,93 @@ namespace HairSalon.Tests
       CollectionAssert.AreEqual(newList, result);
     }
 
-    // [TestMethod]
-    // public void Find_ReturnsCorrectClientFromDatabase_Client()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client("American", 1);
-    //   testClient.Save();
-    //
-    //   //Act
-    //   Client foundClient = Client.Find(testClient.GetId());
-    //
-    //   //Assert
-    //   Assert.AreEqual(testClient, foundClient);
-    // }
-    //
-    // [TestMethod]
-    // public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Client()
-    // {
-    //   // Arrange, Act
-    //   Client firstClient = new Client("English", 1);
-    //   Client secondClient = new Client("English", 1);
-    //
-    //   // Assert
-    //   Assert.AreEqual(firstClient, secondClient);
-    // }
-    //
-    // [TestMethod]
-    // public void Save_SavesToDatabase_ClientList()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client("Chinese", 1);
-    //
-    //   //Act
-    //   testClient.Save();
-    //   List<Client> result = Client.GetAll();
-    //   List<Client> testList = new List<Client>{testClient};
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(testList, result);
-    // }
-    //
-    // [TestMethod]
-    // public void Save_AssignsIdToObject_Id()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client("Chinese", 1);
-    //
-    //   //Act
-    //   testClient.Save();
-    //   Client savedClient = Client.GetAll()[0];
-    //
-    //   int result = savedClient.GetId();
-    //   int testId = testClient.GetId();
-    //
-    //   //Assert
-    //   Assert.AreEqual(testId, result);
-    // }
-    //
-    // [TestMethod]
-    // public void Edit_UpdatesClientInDatabase_String()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client("American", 1);
-    //   testClient.Save();
-    //   string secondDescription = "English";
-    //
-    //   //Act
-    //   testClient.Edit(secondDescription);
-    //   string result = Client.Find(testClient.GetId()).GetTypeOfFood();
-    //
-    //   //Assert
-    //   Assert.AreEqual(secondDescription, result);
-    // }
-    //
-    // [TestMethod]
-    // public void Delete_UpdatesClientInDatabase_String()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client("American", 1);
-    //   Client testClient2 = new Client("English", 1);
-    //   testClient.Save();
-    //   testClient2.Save();
-    //   testClient.Delete(testClient.GetId());
-    //
-    //   List<Client> newList = new List<Client> { testClient2 };
-    //   List<Client> result = Client.GetAll();
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
+    [TestMethod]
+    public void Find_ReturnsCorrectClientFromDatabase_Client()
+    {
+      //Arrange
+      Client testClient = new Client("American", 1);
+      testClient.Save();
+
+      //Act
+      Client foundClient = Client.Find(testClient.GetId());
+
+      //Assert
+      Assert.AreEqual(testClient, foundClient);
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Client()
+    {
+      // Arrange, Act
+      Client firstClient = new Client("English", 1);
+      Client secondClient = new Client("English", 1);
+
+      // Assert
+      Assert.AreEqual(firstClient, secondClient);
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_ClientList()
+    {
+      //Arrange
+      Client testClient = new Client("Chinese", 1);
+
+      //Act
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      //Arrange
+      Client testClient = new Client("Chinese", 1);
+
+      //Act
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
+
+      int result = savedClient.GetId();
+      int testId = testClient.GetId();
+
+      //Assert
+      Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void Edit_UpdatesClientInDatabase_String()
+    {
+      //Arrange
+      Client testClient = new Client("American", 1);
+      testClient.Save();
+      string secondDescription = "English";
+
+      //Act
+      testClient.Edit(secondDescription);
+      string result = Client.Find(testClient.GetId()).GetTypeOfFood();
+
+      //Assert
+      Assert.AreEqual(secondDescription, result);
+    }
+
+    [TestMethod]
+    public void Delete_UpdatesClientInDatabase_String()
+    {
+      //Arrange
+      Client testClient = new Client("American", 1);
+      Client testClient2 = new Client("English", 1);
+      testClient.Save();
+      testClient2.Save();
+      testClient.Delete(testClient.GetId());
+
+      List<Client> newList = new List<Client> { testClient2 };
+      List<Client> result = Client.GetAll();
+      CollectionAssert.AreEqual(newList, result);
+    }
 
   }
 }
