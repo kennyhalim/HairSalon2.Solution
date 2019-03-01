@@ -5,10 +5,10 @@ using HairSalon.Models;
 
 namespace HairSalon.Controllers
 {
-  public class ClientsController : Controller
+  public class StylistsController : Controller
   {
 
-    
+
 
   }
 }

@@ -5,11 +5,11 @@ using System;
 
 namespace HairSalon.Tests
 {
-  [TestClass]
-  public class StylistTest : IDisposable
-  {
-
-  
-
-  }
+  // [TestClass]
+  // public class StylistTest : IDisposable
+  // {
+  //
+  //
+  //
+  // }
 }
