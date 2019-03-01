@@ -93,7 +93,7 @@ namespace HairSalon.Tests
     public void Find_ReturnsCorrectClientFromDatabase_Client()
     {
       //Arrange
-      Client testClient = new Client("American", 1);
+      Client testClient = new Client("test", "test", 1);
       testClient.Save();
 
       //Act
@@ -107,8 +107,8 @@ namespace HairSalon.Tests
     public void Equals_ReturnsTrueIfDescriptionsAreTheSame_Client()
     {
       // Arrange, Act
-      Client firstClient = new Client("English", 1);
-      Client secondClient = new Client("English", 1);
+      Client firstClient = new Client("test", "test", 1);
+      Client secondClient = new Client("test", "test", 1);
 
       // Assert
       Assert.AreEqual(firstClient, secondClient);
@@ -118,7 +118,7 @@ namespace HairSalon.Tests
     public void Save_SavesToDatabase_ClientList()
     {
       //Arrange
-      Client testClient = new Client("Chinese", 1);
+      Client testClient = new Client("test", "test", 1);
 
       //Act
       testClient.Save();
@@ -133,7 +133,7 @@ namespace HairSalon.Tests
     public void Save_AssignsIdToObject_Id()
     {
       //Arrange
-      Client testClient = new Client("Chinese", 1);
+      Client testClient = new Client("test", "test", 1);
 
       //Act
       testClient.Save();
@@ -150,30 +150,31 @@ namespace HairSalon.Tests
     public void Edit_UpdatesClientInDatabase_String()
     {
       //Arrange
-      Client testClient = new Client("American", 1);
+      Client testClient = new Client("test", "test", 1);
       testClient.Save();
-      string secondDescription = "English";
+      string secondName = "test2";
 
       //Act
-      testClient.Edit(secondDescription);
-      string result = Client.Find(testClient.GetId()).GetTypeOfFood();
+      testClient.Edit(secondName);
+      string result = Client.Find(testClient.GetId()).GetName();
 
       //Assert
-      Assert.AreEqual(secondDescription, result);
+      Assert.AreEqual(secondName, result);
     }
 
     [TestMethod]
     public void Delete_UpdatesClientInDatabase_String()
     {
       //Arrange
-      Client testClient = new Client("American", 1);
-      Client testClient2 = new Client("English", 1);
+      Client testClient = new Client("test", "test", 1);
+      Client testClient2 = new Client("test2", "test", 1);
       testClient.Save();
       testClient2.Save();
-      testClient.Delete(testClient.GetId());
-
-      List<Client> newList = new List<Client> { testClient2 };
+      testClient2.Delete(testClient2.GetId());
+      List<Client> newList = new List<Client> { testClient };
       List<Client> result = Client.GetAll();
+
+
       CollectionAssert.AreEqual(newList, result);
     }
 
