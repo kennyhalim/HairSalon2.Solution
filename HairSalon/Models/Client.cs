@@ -43,36 +43,37 @@ namespace HairSalon.Models
       return _stylistId;
     }
 
-    // public static List<Client> GetAll()
-    // {
-    //   List<Cuisine> allCuisines = new List<Cuisine> {};
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM cuisine;";
-    //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   while(rdr.Read())
-    //   {
-    //     int cuisineId = rdr.GetInt32(0);
-    //     string cuisineTypeOfFood = rdr.GetString(1);
-    //     int cuisineRestaurantId = rdr.GetInt32(2);
-    //     Cuisine newCuisine = new Cuisine(cuisineTypeOfFood, cuisineRestaurantId, cuisineId);
-    //     allCuisines.Add(newCuisine);
-    //   }
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return allCuisines;
-    // }
+    public static List<Client> GetAll()
+    {
+      List<Client> allClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM client;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        int ClientId = rdr.GetInt32(0);
+        string ClientName = rdr.GetString(1);
+        string ClientPhone = rdr.GetString(1);
+        int Clientstylistid = rdr.GetInt32(3);
+        Client newClient = new Client(ClientName, ClientPhone, Clientstylistid, ClientId);
+        allClients.Add(newClient);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allClients;
+    }
     //
     // public static void ClearAll()
     // {
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"DELETE FROM cuisine;";
+    //   cmd.CommandText = @"DELETE FROM Client;";
     //   cmd.ExecuteNonQuery();
     //   conn.Close();
     //   if (conn != null)
@@ -81,47 +82,47 @@ namespace HairSalon.Models
     //   }
     // }
     //
-    // public static Cuisine Find(int id)
+    // public static Client Find(int id)
     // {
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM cuisine WHERE id = (@searchId);";
+    //   cmd.CommandText = @"SELECT * FROM Client WHERE id = (@searchId);";
     //   MySqlParameter searchId = new MySqlParameter();
     //   searchId.ParameterName = "@searchId";
     //   searchId.Value = id;
     //   cmd.Parameters.Add(searchId);
     //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   int cuisineId = 0;
-    //   string cuisineName = "";
-    //   int cuisineRestaurantId = 0;
+    //   int ClientId = 0;
+    //   string ClientName = "";
+    //   int Clientstylistid = 0;
     //   while(rdr.Read())
     //   {
-    //     cuisineId = rdr.GetInt32(0);
-    //     cuisineName = rdr.GetString(1);
-    //     cuisineRestaurantId = rdr.GetInt32(2);
+    //     ClientId = rdr.GetInt32(0);
+    //     ClientName = rdr.GetString(1);
+    //     Clientstylistid = rdr.GetInt32(2);
     //   }
-    //   Cuisine newCuisine = new Cuisine(cuisineName, cuisineRestaurantId, cuisineId);
+    //   Client newClient = new Client(ClientName, Clientstylistid, ClientId);
     //   conn.Close();
     //   if (conn != null)
     //   {
     //     conn.Dispose();
     //   }
-    //   return newCuisine;
+    //   return newClient;
     // }
     //
-    // public override bool Equals(System.Object otherCuisine)
+    // public override bool Equals(System.Object otherClient)
     // {
-    //   if (!(otherCuisine is Cuisine))
+    //   if (!(otherClient is Client))
     //   {
     //     return false;
     //   }
     //   else
     //   {
-    //      Cuisine newCuisine = (Cuisine) otherCuisine;
-    //      bool idEquality = this.GetId() == newCuisine.GetId();
-    //      bool descriptionEquality = this.GetTypeOfFood() == newCuisine.GetTypeOfFood();
-    //      bool categoryEquality = this.GetRestaurantId() == newCuisine.GetRestaurantId();
+    //      Client newClient = (Client) otherClient;
+    //      bool idEquality = this.GetId() == newClient.GetId();
+    //      bool descriptionEquality = this.GetName() == newClient.GetName();
+    //      bool categoryEquality = this.Getstylistid() == newClient.Getstylistid();
     //      return (idEquality && descriptionEquality && categoryEquality);
     //    }
     // }
@@ -131,15 +132,15 @@ namespace HairSalon.Models
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"INSERT INTO cuisine (type, restaurant_id) VALUES (@typeoffood, @restaurant_id);";
-    //   MySqlParameter typeoffood = new MySqlParameter();
-    //   typeoffood.ParameterName = "@typeoffood";
-    //   typeoffood.Value = this._typeOfFood;
-    //   cmd.Parameters.Add(typeoffood);
-    //   MySqlParameter restaurantId = new MySqlParameter();
-    //   restaurantId.ParameterName = "@restaurant_id";
-    //   restaurantId.Value = this._restaurantId;
-    //   cmd.Parameters.Add(restaurantId);
+    //   cmd.CommandText = @"INSERT INTO Client (type, restaurant_id) VALUES (@Name, @restaurant_id);";
+    //   MySqlParameter Name = new MySqlParameter();
+    //   Name.ParameterName = "@Name";
+    //   Name.Value = this._Name;
+    //   cmd.Parameters.Add(Name);
+    //   MySqlParameter stylistid = new MySqlParameter();
+    //   stylistid.ParameterName = "@restaurant_id";
+    //   stylistid.Value = this._stylistid;
+    //   cmd.Parameters.Add(stylistid);
     //   cmd.ExecuteNonQuery();
     //   _id = (int) cmd.LastInsertedId;
     //   conn.Close();
@@ -149,22 +150,22 @@ namespace HairSalon.Models
     //   }
     // }
     //
-    // public void Edit(string newTypeOfFood)
+    // public void Edit(string newName)
     // {
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"UPDATE cuisine SET type = @newType WHERE id = @searchId;";
+    //   cmd.CommandText = @"UPDATE Client SET type = @newType WHERE id = @searchId;";
     //   MySqlParameter searchId = new MySqlParameter();
     //   searchId.ParameterName = "@searchId";
     //   searchId.Value = _id;
     //   cmd.Parameters.Add(searchId);
     //   MySqlParameter type = new MySqlParameter();
     //   type.ParameterName = "@newType";
-    //   type.Value = newTypeOfFood;
+    //   type.Value = newName;
     //   cmd.Parameters.Add(type);
     //   cmd.ExecuteNonQuery();
-    //   _typeOfFood = newTypeOfFood; // <--- This line is new!
+    //   _Name = newName; // <--- This line is new!
     //   conn.Close();
     //   if (conn != null)
     //   {
@@ -177,7 +178,7 @@ namespace HairSalon.Models
     //   MySqlConnection conn = DB.Connection();
     //   conn.Open();
     //   var cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"DELETE FROM cuisine WHERE id = @thisId;";
+    //   cmd.CommandText = @"DELETE FROM Client WHERE id = @thisId;";
     //   MySqlParameter thisId = new MySqlParameter();
     //   thisId.ParameterName = "thisId";
     //   thisId.Value = id;
