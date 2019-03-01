@@ -9,8 +9,18 @@ namespace HairSalon.Tests
     [TestClass]
     public class ClientsControllerTest
     {
+      [TestMethod]
+      public void DeleteAll_ReturnsCorrectView_True()
+      {
+        //Arrange
+        ClientsController controller = new ClientsController();
 
+        //Act
+        ActionResult indexView = controller.DeleteAll();
 
+        //Assert
+        Assert.IsInstanceOfType(indexView, typeof(ViewResult));
+      }
 
     }
 }

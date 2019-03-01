@@ -9,7 +9,6 @@ namespace HairSalon.Tests
   [TestClass]
     public class StylistsControllerTest
     {
-
       [TestMethod]
       public void Index_ReturnsCorrectView_True()
       {
@@ -36,5 +35,4 @@ namespace HairSalon.Tests
         Assert.IsInstanceOfType(result, typeof(List<Stylist>));
       }
     }
-
 }
