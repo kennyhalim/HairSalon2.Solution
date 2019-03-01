@@ -111,22 +111,23 @@ namespace HairSalon.Models
     //   return newClient;
     // }
     //
-    // public override bool Equals(System.Object otherClient)
-    // {
-    //   if (!(otherClient is Client))
-    //   {
-    //     return false;
-    //   }
-    //   else
-    //   {
-    //      Client newClient = (Client) otherClient;
-    //      bool idEquality = this.GetId() == newClient.GetId();
-    //      bool descriptionEquality = this.GetName() == newClient.GetName();
-    //      bool categoryEquality = this.Getstylistid() == newClient.Getstylistid();
-    //      return (idEquality && descriptionEquality && categoryEquality);
-    //    }
-    // }
-    //
+    public override bool Equals(System.Object otherClient)
+    {
+      if (!(otherClient is Client))
+      {
+        return false;
+      }
+      else
+      {
+         Client newClient = (Client) otherClient;
+         bool idEquality = this.GetId() == newClient.GetId();
+         bool nameEquality = this.GetName() == newClient.GetName();
+         bool phoneEquality = this.GetPhoneNumber() == newClient.GetPhoneNumber();
+         bool stylistEquality = this.GetStylistid() == newClient.GetStylistid();
+         return (idEquality && nameEquality && phoneEquality && stylistEquality);
+       }
+    }
+
     // public void Save()
     // {
     //   MySqlConnection conn = DB.Connection();

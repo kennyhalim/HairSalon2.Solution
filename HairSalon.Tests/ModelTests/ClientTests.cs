@@ -57,38 +57,38 @@ namespace HairSalon.Tests
       Assert.AreEqual(updatedType, result);
     }
 
-    // [TestMethod]
-    // public void GetAll_ReturnsEmptyList_ClientList()
-    // {
-    //   //Arrange
-    //   List<Client> newList = new List<Client> { };
-    //
-    //   //Act
-    //   List<Client> result = Client.GetAll();
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
-    //
-    // [TestMethod]
-    // public void GetAll_ReturnsClients_ClientList()
-    // {
-    //   //Arrange
-    //   string description01 = "American";
-    //   string description02 = "English";
-    //   Client newClient1 = new Client(description01, 1);
-    //   newClient1.Save();
-    //   Client newClient2 = new Client(description02, 1);
-    //   newClient2.Save();
-    //   List<Client> newList = new List<Client> { newClient1, newClient2 };
-    //
-    //   //Act
-    //   List<Client> result = Client.GetAll();
-    //
-    //   //Assert
-    //   CollectionAssert.AreEqual(newList, result);
-    // }
-    //
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_ClientList()
+    {
+      //Arrange
+      List<Client> newList = new List<Client> { };
+
+      //Act
+      List<Client> result = Client.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsClients_ClientList()
+    {
+      //Arrange
+      string description01 = "American";
+      string description02 = "English";
+      Client newClient1 = new Client(description01, 1);
+      newClient1.Save();
+      Client newClient2 = new Client(description02, 1);
+      newClient2.Save();
+      List<Client> newList = new List<Client> { newClient1, newClient2 };
+
+      //Act
+      List<Client> result = Client.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+    
     // [TestMethod]
     // public void Find_ReturnsCorrectClientFromDatabase_Client()
     // {
