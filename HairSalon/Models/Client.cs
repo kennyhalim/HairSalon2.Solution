@@ -171,7 +171,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM client WHERE id = @thisId;";
+      cmd.CommandText = @"DELETE FROM client WHERE id = @thisId; DELETE FROM stylists_clients WHERE client_id = @thisId;";
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "thisId";
       thisId.Value = id;
@@ -179,6 +179,58 @@ namespace HairSalon.Models
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public List<Stylist> GetStylists()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT stylist.* FROM client
+          JOIN stylists_clients ON (client.id = stylists_clients.client_id)
+          JOIN stylist ON (stylists_clients.stylist_id = stylist.id)
+          WHERE client.id = @ClientId;";
+      MySqlParameter clientId = new MySqlParameter();
+      clientId.ParameterName = "@ClientId";
+      clientId.Value = _id;
+      cmd.Parameters.Add(clientId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Stylist> stylists = new List<Stylist> {};
+      while(rdr.Read())
+      {
+          int stylistId = rdr.GetInt32(0);
+          string stylistName = rdr.GetString(1);
+          Stylist foundStylist = new Stylist(stylistName, stylistId);
+          stylists.Add(foundStylist);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return stylists;
+    }
+
+    public void AddStylist(Stylist newStylist)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO stylists_clients (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+      MySqlParameter stylist_id = new MySqlParameter();
+      stylist_id.ParameterName = "@StylistId";
+      stylist_id.Value = newStylist.GetId();
+      cmd.Parameters.Add(stylist_id);
+      MySqlParameter client_id = new MySqlParameter();
+      client_id.ParameterName = "@ClientId";
+      client_id.Value = _id;
+      cmd.Parameters.Add(client_id);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
       {
         conn.Dispose();
       }
