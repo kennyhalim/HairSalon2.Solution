@@ -178,7 +178,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void GetCategories_ReturnsAllItemCategories_CategoryList()
+    public void GetStylists_ReturnsAllClientStylists_StylistList()
     {
       Client testClient = new Client("Alex", "test");
       testClient.Save();
@@ -193,7 +193,7 @@ namespace HairSalon.Tests
     }
 
     [TestMethod]
-    public void AddCategory_AddsCategoryToItem_CategoryList()
+    public void AddStylist_AddsStylistToClient_StylistList()
     {
       Client newClient = new Client("Alex", "test");
       newClient.Save();
