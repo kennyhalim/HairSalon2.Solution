@@ -3,7 +3,7 @@
 
 @if (@Model["stylistClient"].Count != 0)
 {
-<h3>Here are all the clients in this @Model["stylist"].GetName():</h3>
+<h3>Here are all the clients of @Model["stylist"].GetName():</h3>
 
 <ol>
 @foreach (var client in @Model["stylistClient"])
@@ -30,7 +30,7 @@
 
 @if (@Model["stylistSpecialty"].Count != 0)
 {
-<h3>Here are all the specialties in this @Model["stylist"].GetName():</h3>
+<h3>Here are all the specialties of @Model["stylist"].GetName():</h3>
 
 <ol>
 @foreach (var specialty in @Model["stylistSpecialty"])
