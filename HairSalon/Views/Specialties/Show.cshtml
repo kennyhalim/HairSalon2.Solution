@@ -1,5 +1,11 @@
 @using HairSalon.Models;
-
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+<div class="jumbotron">
+<h1>Hair Salon</h1>
+</div>
 <h1>Specialty Details: </h1>
 
 <h2>Specialty: @Model["selectedSpecialty"].GetName()</h2>
@@ -37,3 +43,4 @@
   <button type="submit">Delete this specialty</button>
 </form>
 <a href='/stylists'>View all Stylists</a>
+</div>

@@ -1,6 +1,11 @@
 @using HairSalon.Models;
-
-
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+<div class="jumbotron">
+<h1>Hair Salon</h1>
+</div>
 @if (@Model["stylistClient"].Count != 0)
 {
 <h3>Here are all the clients of @Model["stylist"].GetName():</h3>
@@ -63,3 +68,4 @@
 </form>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
+</div>

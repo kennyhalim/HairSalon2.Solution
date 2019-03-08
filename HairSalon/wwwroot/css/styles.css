@@ -1,0 +1,13 @@
+body {
+  background-color: #c9af98;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.jumbotron {
+  background-color:	#fffff2;
+}
+
+.jumbotron h1 {
+  color: #3a4660;
+}
