@@ -30,11 +30,11 @@
     <button type='submit'>Add</button>
 </form>
 
-<a href='/clients/@Model["clients"].GetId()/edit'>Edit this client</a>
+<a href='/clients/@Model["selectedClient"].GetId()/edit'>Edit this client</a>
 <br><br>
 <a href='/clients/new'>Add another client</a>
 <br><br>
-<form action="/clients/@Model["clients"].GetId()/delete" method="post">
+<form action="/clients/@Model["selectedClient"].GetId()/delete" method="post">
   <button type="submit">Delete this client</button>
 </form>
 <a href='/stylists'>View all Stylists</a>
