@@ -29,6 +29,7 @@ Download Mono and install it.
 1.)Clone this repository: $ git clone https://github.com/kennyhalim/HairSalon.Solution
 2.)Change into the work directory:: $ cd HairSalon.Solution
 3.)To edit the project, open the project in your preferred text editor.
+4.)Export both sql files contained in the parent directory to your PhpMyAdmin. Or Copy the scripts in the file and paste them in mysql.
 
 To run the tests, use these commands: $ cd HairSalon.Tests $ dotnet test
 
