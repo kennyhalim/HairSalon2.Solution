@@ -19,6 +19,11 @@ namespace HairSalon.Models
       return _name;
     }
 
+    public void SetName(string newName)
+    {
+      _name = newName;
+    }
+
     public int GetId()
     {
       return _id;
@@ -173,7 +178,7 @@ namespace HairSalon.Models
       name.Value = newStylist;
       cmd.Parameters.Add(name);
       cmd.ExecuteNonQuery();
-      _name = newStylist; // <--- This line is new!
+      _name = newStylist; 
       conn.Close();
       if (conn != null)
       {

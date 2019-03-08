@@ -66,7 +66,7 @@ namespace HairSalon.Controllers
       }
 
       [HttpGet("/clients/{clientId}/edit")]
-      public ActionResult Edit(int stylistId, int clientId)
+      public ActionResult Edit(int clientId)
       {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Client client = Client.Find(clientId);
@@ -75,7 +75,7 @@ namespace HairSalon.Controllers
       }
 
       [HttpPost("/clients/{clientId}")]
-      public ActionResult Update(int stylistId, int clientId, string newName)
+      public ActionResult Update(int clientId, string newName)
       {
         Client client = Client.Find(clientId);
         client.Edit(newName);
