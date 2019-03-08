@@ -1,68 +1,96 @@
-// using Microsoft.AspNetCore.Mvc;
-// using HairSalon.Models;
-// using System.Collections.Generic;
-//
-// namespace HairSalon.Controllers
-// {
-//   public class ClientsController : Controller
-//   {
-//     [HttpGet("/stylists/{stylistId}/clients/new")]
-//     public ActionResult New(int stylistId)
-//     {
-//      Stylist stylist = Stylist.Find(stylistId);
-//      return View(stylist);
-//     }
-//
-//     [HttpGet("/stylists/{stylistId}/clients/{clientId}")]
-//     public ActionResult Show(int stylistId, int clientId)
-//     {
-//       Client item = Client.Find(clientId);
-//       Dictionary<string, object> model = new Dictionary<string, object>();
-//       Stylist stylist = Stylist.Find(stylistId);
-//       model.Add("clients", item);
-//       model.Add("stylists", stylist);
-//       return View(model);
-//     }
-//
-//     [HttpPost("/stylists/{stylistId}/clients/{clientId}/delete")]
-//     public ActionResult Delete(int stylistId, int clientId)
-//     {
-//       Stylist foundStylist = Stylist.Find(stylistId);
-//       Client item = Client.Find(clientId);
-//       item.Delete(clientId);
-//       return View(foundStylist);
-//     }
-//
-//
-//     [HttpPost("/clients/delete")]
-//     public ActionResult DeleteAll()
-//     {
-//       Client.ClearAll();
-//       return View();
-//     }
-//
-//     [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
-//     public ActionResult Edit(int stylistId, int clientId)
-//     {
-//       Dictionary<string, object> model = new Dictionary<string, object>();
-//       Stylist stylist = Stylist.Find(stylistId);
-//       model.Add("stylists", stylist);
-//       Client item = Client.Find(clientId);
-//       model.Add("clients", item);
-//       return View(model);
-//     }
-//
-//     [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
-//     public ActionResult Update(int stylistId, int clientId, string newName)
-//     {
-//       Client item = Client.Find(clientId);
-//       item.Edit(newName);
-//       Dictionary<string, object> model = new Dictionary<string, object>();
-//       Stylist stylist = Stylist.Find(stylistId);
-//       model.Add("stylists", stylist);
-//       model.Add("clients", item);
-//       return View("Show", model);
-//     }
-//
-//   }
-// }
+using Microsoft.AspNetCore.Mvc;
+using HairSalon.Models;
+using System.Collections.Generic;
+
+namespace HairSalon.Controllers
+{
+  public class ClientsController : Controller
+  {
+    [HttpGet("/clients")]
+     public ActionResult Index()
+     {
+       List<Client> allClients = Client.GetAll();
+       return View(allClients);
+     }
+
+     [HttpGet("/clients/new")]
+      public ActionResult New()
+      {
+        return View();
+      }
+
+      [HttpPost("/clients")]
+      public ActionResult Create(string newClientName, string newClientPhone)
+      {
+        Client newClient = new Client(newClientName, newClientPhone);
+        newClient.Save();
+        List<Client> allClients = Client.GetAll();
+        return View("Index", allClients);
+      }
+
+      [HttpGet("/clients/{id}")]
+      public ActionResult Show(int id)
+      {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Client selectedClient = Client.Find(id);
+        List<Stylist> clientStylists = selectedClient.GetStylists();
+        List<Stylist> allStylists = Stylist.GetAll();
+        model.Add("selectedClient", selectedClient);
+        model.Add("clientStylists", clientStylists);
+        model.Add("allStylists", allStylists);
+        return View(model);
+      }
+
+      [HttpPost("/clients/{clientId}/stylists/new")]
+      public ActionResult AddStylist(int clientId, int stylistId)
+      {
+        Client client = Client.Find(clientId);
+        Stylist stylist = Stylist.Find(stylistId);
+        client.AddStylist(stylist);
+        return RedirectToAction("Show",  new { id = clientId });
+      }
+
+      [HttpPost("/clients/deleteall")]
+      public ActionResult DeleteAll()
+      {
+        Client.ClearAll();
+        return View();
+      }
+
+      [HttpPost("/clients/{clientId}/delete")]
+      public ActionResult Delete(int clientId)
+      {
+        Client client = Client.Find(clientId);
+        client.Delete(clientId);
+        return RedirectToAction("Index");
+      }
+
+      [HttpGet("/clients/{clientId}/edit")]
+      public ActionResult Edit(int stylistId, int clientId)
+      {
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        Client client = Client.Find(clientId);
+        model.Add("client", client);
+        return View(model);
+      }
+
+      [HttpPost("/clients/{clientId}")]
+      public ActionResult Update(int stylistId, int clientId, string newName)
+      {
+        Client client = Client.Find(clientId);
+        client.Edit(newName);
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        List<Stylist> clientStylists = client.GetStylists();
+        List<Stylist> allStylists = Stylist.GetAll();
+        model.Add("selectedClient", client);
+        model.Add("clientStylists", clientStylists);
+        model.Add("allStylists", allStylists);
+        return View("Show", model);
+      }
+
+
+
+
+
+  }
+}

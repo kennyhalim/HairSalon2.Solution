@@ -134,6 +134,11 @@ namespace HairSalon.Models
       }
     }
 
+    public override int GetHashCode()
+    {
+        return this.GetId().GetHashCode();
+    }
+
     public void Save()
     {
       MySqlConnection conn = DB.Connection();

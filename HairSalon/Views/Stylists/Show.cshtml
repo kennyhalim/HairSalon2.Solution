@@ -1,17 +1,34 @@
-<h3>All Clients in @Model["stylists"].GetName()</h3>
+@using HairSalon.Models;
+
+
+@if (@Model["stylistClient"].Count != 0)
+{
+<h3>Here are all the clients in this stylist:</h3>
 
 <ol>
-@foreach (var client in @Model["clients"])
+@foreach (var client in @Model["stylistClient"])
 {
-  <li><a href='/stylists/@Model["stylists"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+  <li><a href='/clients/@client.GetId()'>@client.GetName()</a></li>
 }
 </ol>
+}
 
+<h4>Add a client to this Stylist:</h4>
 
-<p><a href='/stylists/@Model["stylists"].GetId()/clients/new'>Add a new client</a></p>
-<form action="/stylists/@Model["stylists"].GetId()/delete" method="post">
-  <button type="submit">Delete this stylist</button>
+<form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
+  <label for='clientId'>Select a client</label>
+  <select id='clientId' name='clientId' type='text'>
+
+    @foreach (var client in @Model["allClients"])
+    {
+      <option value='@client.GetId()'>@client.GetName()</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
 </form>
-<p><a href='/stylists'>Return to stylist list</a></p>
 
+<p><a href='/clients/new'>Add a new client</a></p>
+<p><a href="/stylists/delete">Delete this stylist</a></p>
+<p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
