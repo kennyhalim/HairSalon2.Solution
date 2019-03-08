@@ -28,7 +28,35 @@
   <button type='submit'>Add</button>
 </form>
 
+@if (@Model["stylistSpecialty"].Count != 0)
+{
+<h3>Here are all the specialties in this @Model["stylist"].GetName():</h3>
+
+<ol>
+@foreach (var specialty in @Model["stylistSpecialty"])
+{
+  <li><a href='/specialties/@specialty.GetId()'>@specialty.GetName()</a></li>
+}
+</ol>
+}
+
+<h4>Add a specialty to this @Model["stylist"].GetName():</h4>
+
+<form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
+  <label for='specialtyId'>Select a specialty</label>
+  <select id='specialtyId' name='specialtyId' type='text'>
+
+    @foreach (var specialty in @Model["allSpecialties"])
+    {
+      <option value='@specialty.GetId()'>@specialty.GetName()</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
 <p><a href='/clients/new'>Add a new client</a></p>
+<p><a href='/specialties/new'>Add a new specialty</a></p>
 <a href='/stylists/@Model["stylist"].GetId()/edit'>Edit this stylist</a><br><br>
 <form action="/stylists/@Model["stylist"].GetId()/delete" method="post">
   <button type="submit">Delete this stylist</button>
